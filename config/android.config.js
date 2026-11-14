@@ -12,7 +12,8 @@ config.capabilities = [
         automationName: 'uiautomator2',
         deviceName: AndroidInfo.deviceName(),
         platformVersion: AndroidInfo.platFormVersion(),
-        app: path.resolve(`./apps/${AndroidInfo.appName()}`)
+        appPackage: 'com.androiddev2015.cfconverter',
+        appActivity: 'com.androiddev2015.cfconverter.MainActivity'
     }
 ];
 
