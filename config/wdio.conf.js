@@ -1,4 +1,7 @@
 const { generate } = require('multiple-cucumber-html-reporter');
+const fs = require('fs');
+const path = require('path');
+let executionStartedAt;
 
 exports.config = {
     //
@@ -20,7 +23,7 @@ exports.config = {
     // directory is where your package.json resides, so `wdio` will be called from there.
     //
     specs: [
-        './src/featureFiles/sampleTest.feature'
+        './src/featureFiles/Test.feature'
     ],
     // Patterns to exclude.
     exclude: [
@@ -159,8 +162,17 @@ exports.config = {
      * @param {Object} config wdio configuration object
      * @param {Array.<Object>} capabilities list of capabilities details
      */
-    // onPrepare: function (config, capabilities) {
-    // },
+    onPrepare: function () {
+        executionStartedAt = new Date();
+        const jsonDir = path.resolve('./reports/json');  // Comment line 167-174 to prevent deletion of existing JSON reports
+        if (fs.existsSync(jsonDir)) {
+            for (const file of fs.readdirSync(jsonDir)) {
+                if (file.endsWith('.json')) {
+                    fs.unlinkSync(path.join(jsonDir, file));
+                }
+            }
+        }
+    },
     /**
      * Gets executed before a worker process is spawned and can be used to initialise specific service
      * for that worker as well as modify runtime environments in an async fashion.
@@ -266,10 +278,42 @@ exports.config = {
      * @param {Array.<Object>} capabilities list of capabilities details
      * @param {<Object>} results object containing test results
      */
-    onComplete: function(exitCode, config, capabilities, results) {
+    onComplete: function(exitCode, config) {
+        const executionFinishedAt = new Date();
+        const assetsSource = path.join(
+            path.dirname(require.resolve('multiple-cucumber-html-reporter/package.json')),
+            'templates', 'assets'
+        );
+        for (const folder of [
+            'css', 'fonts', 'js'
+        ]) {
+            const sourceFolder = path.join(assetsSource, folder);
+            const targetFolder = path.resolve('./reports/html/assets', folder);
+            fs.mkdirSync(targetFolder, {recursive: true});
+            for (const file of fs.readdirSync(sourceFolder)) {
+                fs.copyFileSync(path.join(sourceFolder, file), path.join(targetFolder, file));
+            }
+        }
         generate({
             jsonDir: './reports/json',
             reportPath: './reports/html',
+            reportName: 'Mobile Automation Test Report',
+            pageTitle: 'Mobile Automation Results',
+            displayDuration: true,
+            customData: {
+                title: 'Execution details',
+                data: [
+                    {label: 'Framework', value: 'WebdriverIO 6 + Appium + Cucumber 6'},
+                    {label: 'Feature files', value: config.specs.join(', ')},
+                    {label: 'Started (UTC)', value: executionStartedAt.toISOString()},
+                    {label: 'Finished (UTC)', value: executionFinishedAt.toISOString()},
+                    {
+                        label: 'Elapsed time',
+                        value: `${((executionFinishedAt - executionStartedAt) / 1000).toFixed(2)} seconds`
+                    },
+                    {label: 'Run result', value: exitCode === 0 ? 'Passed' : 'Failed'}
+                ]
+            },
             openReportInBrowser: true
         });
     },

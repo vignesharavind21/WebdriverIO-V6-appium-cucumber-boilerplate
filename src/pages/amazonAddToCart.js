@@ -72,8 +72,8 @@ class AmazonAddToCartPage {
         for (let scrolls = 0; scrolls < 3 && !ActionHelper.isVisible(productPriceButton); scrolls++) {
             ActionHelper.scrollDown();
         }
-        ActionHelper.waitForElement(this.getObjectLocator().productPrice, 5);
-        ActionHelper.isVisible(this.getObjectLocator().productPrice).should.be.true;
+        ActionHelper.waitForElement(productPriceButton, 5);
+        ActionHelper.getText(productPriceButton).should.match(/\d/, 'Product price should contain a number');
     }
 
     addToCart() {

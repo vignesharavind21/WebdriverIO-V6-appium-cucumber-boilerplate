@@ -17,7 +17,7 @@ class amazonAddToCart{
         this.productDetails =
             '//android.view.View[contains(@text, "iPhone 18 Pro")]';
         this.productPrice =
-            '//android.view.View[@resource-id="corePriceDisplay_mobile_feature_div"]';
+            '//android.widget.TextView[@resource-id="apex-pricetopay-accessibility-label"]';
         this.addToCartButton =
             '//*[@resource-id="add-to-cart-button"]';
         this.doneButton =

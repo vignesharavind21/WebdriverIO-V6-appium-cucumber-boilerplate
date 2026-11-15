@@ -25,18 +25,19 @@ Click below to know more
 
 ## Running sample test
 Follow the below commands -
-- Clone the project - `https://github.com/Arjun-Ar91/WebdriverIO-V6-appium-cucumber-boilerplate.git`.
+- Cloned the project - `https://github.com/Arjun-Ar91/WebdriverIO-V6-appium-cucumber-boilerplate.git`.
 
 - Install dependencies using `npm i` in the terminal.
 
 - Update the deviceName and platFormVersion in `config/android.info.js` and `config/ios.info.js` respectively.
 
-- Execute `npm run ios` to run ios native app
-
-- Execute `npm run iosBrowser` to run ios safari browser
-
 - Execute `npm run android` to run android native app
 
-- Execute `npm run androidBrowser` to run android chrome browser
-
 - Execute `npm run lint` to run eslint
+
+- Previous JSON report results are cleared before each run, so `reports/html/index.html`
+  contains only the latest execution.
+
+- The HTML report includes execution timestamps, elapsed time, step durations,
+  and Android app/device/OS metadata. CSS, JavaScript and fonts are copied locally
+  so charts and expandable step details work when viewing the report offline.

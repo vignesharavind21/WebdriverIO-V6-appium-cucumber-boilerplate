@@ -20,7 +20,12 @@ config.capabilities = [
         deviceName: AndroidInfo.deviceName(),
         platformVersion: AndroidInfo.platFormVersion(),
         appPackage: 'in.amazon.mShop.android.shopping',
-        appActivity: 'com.amazon.mShop.home.HomeActivity'
+        appActivity: 'com.amazon.mShop.home.HomeActivity',
+        'cjson:metadata': {
+            app: {name: 'Amazon Shopping', version: 'Not recorded'},
+            device: AndroidInfo.deviceName(),
+            platform: {name: 'android', version: AndroidInfo.platFormVersion()}
+        }
     }
 ];
 
