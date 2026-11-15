@@ -116,6 +116,7 @@ exports.config = {
         name: [],
         profile: [],
         require: [
+            './src/stepDefinitions/amazonAddToCart.js',
             './src/stepDefinitions/celsiusToFahrenheitConvertor.steps.js',
             './src/stepDefinitions/google.steps.js',
             './src/stepDefinitions/settings.steps.js'

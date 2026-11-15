@@ -1,19 +1,26 @@
 const {config} = require('./wdio.conf');
 const AndroidInfo = require('./android.info');
-const path = require('path');
+
+// Use the already-running Appium server.
+config.services = [
+];
+
+// Avoid relaunching the app when session creation fails.
+config.connectionRetryCount = 0;
 
 // Appium capabilities
 config.capabilities = [
     {
         platformName: 'Android',
-        noReset: true,
+        noReset: false,
         fullReset: false,
+        autoLaunch: false, // Launch only from the Given step.
         maxInstances: 1,
         automationName: 'uiautomator2',
         deviceName: AndroidInfo.deviceName(),
         platformVersion: AndroidInfo.platFormVersion(),
-        appPackage: 'com.androiddev2015.cfconverter',
-        appActivity: 'com.androiddev2015.cfconverter.MainActivity'
+        appPackage: 'in.amazon.mShop.android.shopping',
+        appActivity: 'com.amazon.mShop.home.HomeActivity'
     }
 ];
 

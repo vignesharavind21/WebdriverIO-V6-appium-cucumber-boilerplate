@@ -1,17 +1,19 @@
 Feature: Sample feature file to illustrate app and browser tests
 
-  @androidApp
-  Scenario: Convert C to F of a native android app
-    Given I launch the app
-    When I enter celsius of 1
-    Then I should see fahrenheit of 33.8
-
-  @iosApp
-  Scenario: Launch Settings app of an iphone
-    Given I launch the settings app of iphone
-    Then I should see the general label
-
-  @androidBrowser @iosBrowser
-  Scenario: Launch the google url in browser
-    Given I launch the google
-    Then I verify the title to be Google
+  @androidApp    
+  Scenario: Search for a mobile phone and add it to cart
+    Given I launch the Amazon app
+  
+  @androidApp123
+  Scenario: Search for a mobile phone and add it to cart
+    Given I launch the Amazon app
+    When I tap the search box
+    And I enter "iPhone 15"
+    And I submit the search
+    Then I should see the search results
+    And I should see "iPhone" in the results
+    When I select an iPhone from the results
+    Then I should see the product details
+    And I should see the product price
+    When I add the product to the cart
+    Then the cart should contain the selected product
