@@ -41,3 +41,7 @@ Follow the below commands -
 - The HTML report includes execution timestamps, elapsed time, step durations,
   and Android app/device/OS metadata. CSS, JavaScript and fonts are copied locally
   so charts and expandable step details work when viewing the report offline.
+
+- Android sessions are recorded for up to three minutes. MP4 files are saved in
+  `reports/html/videos/` and embedded as an Attachment on the last scenario step
+  in the HTML report, including failed runs. Recordings increase report file sizes.

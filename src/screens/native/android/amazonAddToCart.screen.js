@@ -1,7 +1,8 @@
 class amazonAddToCart{
     constructor(){
         this.dismissNotificationsButton =
-            '//android.widget.Button[@resource-id="com.android.permissioncontroller:id/permission_deny_button"]';
+            '//android.widget.Button[@resource-id=' +
+            '"com.android.permissioncontroller:id/permission_deny_button"]';
         this.englishLanguageButton =
             '~Select English';
         this.continueButton =
@@ -17,7 +18,7 @@ class amazonAddToCart{
         this.productDetails =
             '//android.view.View[contains(@text, "iPhone 18 Pro")]';
         this.productPrice =
-            '//android.widget.TextView[@resource-id="apex-pricetopay-accessibility-label"]';
+        '//android.widget.TextView[@resource-id="apex-pricetopay-accessibility-label"]';
         this.addToCartButton =
             '//*[@resource-id="add-to-cart-button"]';
         this.doneButton =
